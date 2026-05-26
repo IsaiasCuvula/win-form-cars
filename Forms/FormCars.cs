@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
@@ -32,9 +32,6 @@ namespace Cars.Forms
                 {
                     dt.Load(reader);
                 }
-
-                foreach (DataRow row in dt.Rows)
-                    row["Luggage"] = row["Luggage"].ToString() == "1" ? "Yes" : "No";
 
                 dgvCars.DataSource = dt;
             }

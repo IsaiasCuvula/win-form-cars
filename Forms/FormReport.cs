@@ -39,7 +39,7 @@ namespace Cars.Forms
                     ORDER BY SUM(o.Fare) DESC";
 
                 var cmd = new SqliteCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@date", filterDate);
+                cmd.Parameters.AddWithValue("@date", dtpFilter.Value.ToString("yyyy-MM-dd 23:59:59"));
                 cmd.Parameters.AddWithValue("@userId", Session.UserId);
 
                 var ds = new DataSet();
