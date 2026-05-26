@@ -41,6 +41,7 @@
             btnSave = new Button();
             btnDelete = new Button();
             dgvCars = new DataGridView();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)nudSeats).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCars).BeginInit();
             SuspendLayout();
@@ -163,11 +164,21 @@
             dgvCars.TabIndex = 12;
             dgvCars.CellContentClick += dgvCars_CellContentClick;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(147, 104);
+            label6.Name = "label6";
+            label6.Size = new Size(56, 15);
+            label6.TabIndex = 13;
+            label6.Text = "Luggage:";
+            // 
             // FormCars
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(645, 507);
+            Controls.Add(label6);
             Controls.Add(dgvCars);
             Controls.Add(btnDelete);
             Controls.Add(btnSave);
@@ -207,5 +218,6 @@
         private Button btnSave;
         private Button btnDelete;
         private DataGridView dgvCars;
+        private Label label6;
     }
 }
