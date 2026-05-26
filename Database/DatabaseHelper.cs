@@ -18,6 +18,13 @@ namespace Cars.Database
             {
                 conn.Open();
                 string sql = @"
+                     CREATE TABLE IF NOT EXISTS Users (
+                        Id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                        UserName    TEXT NOT NULL UNIQUE,
+                        Password    TEXT NOT NULL,
+                        EGN         TEXT NOT NULL CHECK(length(EGN) = 10)
+                    );
+
                     CREATE TABLE IF NOT EXISTS Cars (
                         CodeTaxi    INTEGER PRIMARY KEY AUTOINCREMENT,
                         RegNumber   TEXT NOT NULL UNIQUE,
@@ -38,7 +45,13 @@ namespace Cars.Database
                     );
                 ";
                 new SqliteCommand(sql, conn).ExecuteNonQuery();
-            }
+
+                //Default user
+                string insertUser = @"
+                INSERT OR IGNORE INTO Users (UserName, Password, EGN)
+                VALUES ('QWERTYUIO', '123456', '9711011020')";
+                     new SqliteCommand(insertUser, conn).ExecuteNonQuery();
+                }
         }
     }
 }

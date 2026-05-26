@@ -1,6 +1,7 @@
+using Cars.Database;
+using Cars.Forms;
 using System;
 using System.Windows.Forms;
-using Cars.Database;
 
 namespace Cars
 {
@@ -11,7 +12,7 @@ namespace Cars
         {
             ApplicationConfiguration.Initialize();
             DatabaseHelper.InitializeDatabase();
-            Application.Run(new FormMenu());
+            Application.Run(new FormLogin()); 
         }
     }
 }
