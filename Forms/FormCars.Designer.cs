@@ -196,7 +196,6 @@
             Name = "FormCars";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cars Management";
-            Load += FormCars_Load;
             ((System.ComponentModel.ISupportInitialize)nudSeats).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCars).EndInit();
             ResumeLayout(false);

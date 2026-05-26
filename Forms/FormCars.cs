@@ -10,12 +10,6 @@ namespace Cars.Forms
     {
         private int selectedCodeTaxi = -1;
 
-        private void FormCars_Load(object sender, EventArgs e)
-        {
-            InitializeComponent();
-            LoadCars();
-        }
-
         public FormCars()
         {
             InitializeComponent();
@@ -47,7 +41,7 @@ namespace Cars.Forms
                 string.IsNullOrWhiteSpace(txtCarBrand.Text) ||
                 string.IsNullOrWhiteSpace(txtDriverName.Text))
             {
-                MessageBox.Show("Fill all the forms!", "Attention",
+                MessageBox.Show("Fill in all the forms!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
