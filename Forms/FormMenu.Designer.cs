@@ -40,7 +40,7 @@
             introduction_btn.Name = "introduction_btn";
             introduction_btn.Size = new Size(120, 33);
             introduction_btn.TabIndex = 0;
-            introduction_btn.Text = "Cars - Management";
+            introduction_btn.Text = "Cars";
             introduction_btn.UseVisualStyleBackColor = true;
             introduction_btn.Click += button1_Click;
             // 

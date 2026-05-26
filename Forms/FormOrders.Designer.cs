@@ -155,9 +155,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(88, 142);
             label2.Name = "label2";
-            label2.Size = new Size(52, 15);
+            label2.Size = new Size(68, 15);
             label2.TabIndex = 26;
-            label2.Text = "Fare (lv):";
+            label2.Text = "Tarif (Euro):";
             // 
             // FormOrders
             // 
