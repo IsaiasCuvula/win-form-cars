@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Data.SQLite;
 using System.IO;
+using Microsoft.Data.Sqlite;
 
 namespace Cars.Database
 {
@@ -10,11 +10,11 @@ namespace Cars.Database
             AppDomain.CurrentDomain.BaseDirectory, "cars.db");
 
         public static string ConnectionString =>
-            $"Data Source={dbPath};Version=3;";
+            $"Data Source={dbPath}";
 
         public static void InitializeDatabase()
         {
-            using (var conn = new SQLiteConnection(ConnectionString))
+            using (var conn = new SqliteConnection(ConnectionString))
             {
                 conn.Open();
                 string sql = @"
@@ -37,7 +37,7 @@ namespace Cars.Database
                         FOREIGN KEY (CodeTaxi) REFERENCES Cars(CodeTaxi)
                     );
                 ";
-                new SQLiteCommand(sql, conn).ExecuteNonQuery();
+                new SqliteCommand(sql, conn).ExecuteNonQuery();
             }
         }
     }
