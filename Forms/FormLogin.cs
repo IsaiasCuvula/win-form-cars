@@ -1,5 +1,6 @@
 ﻿using Cars.Database;
 using Microsoft.Data.Sqlite;
+using static System.Collections.Specialized.BitVector32;
 
 
 namespace Cars.Forms
@@ -48,11 +49,18 @@ namespace Cars.Forms
 
                 if (count > 0)
                 {
+                    var cmdId = new SqliteCommand(
+                      "SELECT Id FROM Users WHERE UserName=@user", conn);
+                    cmdId.Parameters.AddWithValue("@user", username);
+                    Session.UserId = Convert.ToInt32(cmdId.ExecuteScalar());
+                    Session.UserName = username;
+
                     MessageBox.Show($"Welcome, {username}!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
                     FormMenu menu = new FormMenu();
                     menu.ShowDialog();
+                  
                     this.Close();
                 }
                 else

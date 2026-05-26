@@ -48,14 +48,18 @@ namespace Cars.Forms
             {
                 conn.Open();
                 string sql = @"
-                    SELECT o.OrderNumber, c.RegNumber, c.CarBrand, 
-                           o.Address, o.OrderTime, o.Distance, o.Fare
-                    FROM Orders o
-                    INNER JOIN Cars c ON o.CodeTaxi = c.CodeTaxi
-                    ORDER BY o.OrderTime DESC";
+            SELECT o.OrderNumber, c.RegNumber, c.CarBrand, 
+                   o.Address, o.OrderTime, o.Distance, o.Fare
+            FROM Orders o
+            INNER JOIN Cars c ON o.CodeTaxi = c.CodeTaxi
+            ORDER BY o.OrderTime DESC";
 
                 var cmd = new SqliteCommand(sql, conn);
-                var dt = new DataTable();
+
+                var ds = new DataSet();
+                ds.EnforceConstraints = false;
+
+                var dt = ds.Tables.Add("Orders");
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -68,12 +72,12 @@ namespace Cars.Forms
 
         private void btnSave_Click_1(object sender, EventArgs e)
         {
-            if (cmbTaxi.SelectedItem == null ||
-                string.IsNullOrWhiteSpace(txtAddress.Text) ||
-                string.IsNullOrWhiteSpace(txtDistance.Text) ||
-                string.IsNullOrWhiteSpace(txtFare.Text))
+          if (cmbTaxi.SelectedItem == null ||
+               string.IsNullOrWhiteSpace(txtAddress.Text) ||
+               string.IsNullOrWhiteSpace(txtDistance.Text) ||
+               string.IsNullOrWhiteSpace(txtFare.Text))
             {
-                MessageBox.Show("Fill all the forms!", "Attention",
+                MessageBox.Show("Fill in all the fields!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -83,7 +87,7 @@ namespace Cars.Forms
                 System.Globalization.CultureInfo.InvariantCulture,
                 out double distance) || distance <= 0)
             {
-                MessageBox.Show("Distância deve ser um número positivo!", "Attention",
+                MessageBox.Show("Distance must be a positive number!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -93,7 +97,7 @@ namespace Cars.Forms
                 System.Globalization.CultureInfo.InvariantCulture,
                 out double fare) || fare <= 0)
             {
-                MessageBox.Show("Taxa deve ser um número positivo!", "Attention",
+                MessageBox.Show("Fare must be a positive number!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -108,18 +112,19 @@ namespace Cars.Forms
 
                 if (selectedOrderNumber == -1)
                 {
-                    sql = @"INSERT INTO Orders (CodeTaxi, Address, OrderTime, Distance, Fare)
-                            VALUES (@taxi, @address, @time, @distance, @fare)";
+                    sql = @"INSERT INTO Orders (CodeTaxi, UserId, Address, OrderTime, Distance, Fare)
+                    VALUES (@taxi, @user, @address, @time, @distance, @fare)";
                 }
                 else
                 {
-                    sql = @"UPDATE Orders SET CodeTaxi=@taxi, Address=@address,
-                            OrderTime=@time, Distance=@distance, Fare=@fare
-                            WHERE OrderNumber=@order";
+                    sql = @"UPDATE Orders SET CodeTaxi=@taxi, UserId=@user, Address=@address,
+                    OrderTime=@time, Distance=@distance, Fare=@fare
+                    WHERE OrderNumber=@order";
                 }
 
                 var cmd = new SqliteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@taxi", taxi.Id);
+                cmd.Parameters.AddWithValue("@user", Session.UserId);
                 cmd.Parameters.AddWithValue("@address", txtAddress.Text.Trim());
                 cmd.Parameters.AddWithValue("@time", orderTime);
                 cmd.Parameters.AddWithValue("@distance", distance);

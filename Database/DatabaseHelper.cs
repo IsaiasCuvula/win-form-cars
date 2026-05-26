@@ -7,7 +7,7 @@ namespace Cars.Database
     public class DatabaseHelper
     {
         private static string dbPath = Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "cars.db");
+            AppDomain.CurrentDomain.BaseDirectory, "cars_v1.db");
 
         public static string ConnectionString =>
             $"Data Source={dbPath}";
@@ -17,8 +17,9 @@ namespace Cars.Database
             using (var conn = new SqliteConnection(ConnectionString))
             {
                 conn.Open();
+
                 string sql = @"
-                     CREATE TABLE IF NOT EXISTS Users (
+                    CREATE TABLE IF NOT EXISTS Users (
                         Id          INTEGER PRIMARY KEY AUTOINCREMENT,
                         UserName    TEXT NOT NULL UNIQUE,
                         Password    TEXT NOT NULL,
@@ -37,11 +38,13 @@ namespace Cars.Database
                     CREATE TABLE IF NOT EXISTS Orders (
                         OrderNumber INTEGER PRIMARY KEY AUTOINCREMENT,
                         CodeTaxi    INTEGER NOT NULL,
+                        UserId      INTEGER NOT NULL,
                         Address     TEXT NOT NULL,
                         OrderTime   TEXT NOT NULL DEFAULT (datetime('now','localtime')),
                         Distance    REAL NOT NULL CHECK(Distance > 0),
                         Fare        REAL NOT NULL CHECK(Fare > 0),
-                        FOREIGN KEY (CodeTaxi) REFERENCES Cars(CodeTaxi)
+                        FOREIGN KEY (CodeTaxi) REFERENCES Cars(CodeTaxi),
+                        FOREIGN KEY (UserId) REFERENCES Users(Id)
                     );
                 ";
                 new SqliteCommand(sql, conn).ExecuteNonQuery();

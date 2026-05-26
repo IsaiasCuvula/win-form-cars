@@ -1,3 +1,4 @@
+using Cars.Database;
 using Cars.Forms;
 using System;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ namespace Cars
         public FormMenu()
         {
             InitializeComponent();
+            this.Text = $"Cars - Menu Principal ({Session.UserName})";
         }
 
         private void button1_Click(object sender, EventArgs e)
