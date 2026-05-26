@@ -25,16 +25,18 @@ namespace Cars
             formReport.ShowDialog();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void ordersBtn_Click(object sender, EventArgs e)
         {
 
             FormOrders formReport = new FormOrders();
             formReport.ShowDialog();
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            Session.UserId = 0;
+            Session.UserName = "";
+            this.Close();
         }
     }
 }

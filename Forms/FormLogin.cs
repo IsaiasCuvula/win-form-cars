@@ -60,7 +60,7 @@ namespace Cars.Forms
                     this.Hide();
                     FormMenu menu = new FormMenu();
                     menu.ShowDialog();
-                  
+
                     this.Close();
                 }
                 else
@@ -133,5 +133,9 @@ namespace Cars.Forms
             return true;
         }
 
+        private void close_btn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

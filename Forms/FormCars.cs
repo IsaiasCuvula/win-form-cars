@@ -21,14 +21,20 @@ namespace Cars.Forms
             using (var conn = new SqliteConnection(DatabaseHelper.ConnectionString))
             {
                 conn.Open();
-                string sql = "SELECT * FROM Cars";
+                string sql = "SELECT CodeTaxi, RegNumber, CarBrand, Seats, Luggage, DriverName FROM Cars";
                 var cmd = new SqliteCommand(sql, conn);
-                var dt = new DataTable();
+
+                var ds = new DataSet();
+                ds.EnforceConstraints = false;
+                var dt = ds.Tables.Add("Cars");
 
                 using (var reader = cmd.ExecuteReader())
                 {
                     dt.Load(reader);
                 }
+
+                foreach (DataRow row in dt.Rows)
+                    row["Luggage"] = row["Luggage"].ToString() == "1" ? "Yes" : "No";
 
                 dgvCars.DataSource = dt;
             }

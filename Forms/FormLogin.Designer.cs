@@ -38,6 +38,7 @@
             label1 = new Label();
             label2 = new Label();
             txtUsername = new TextBox();
+            close_btn = new Button();
             SuspendLayout();
             // 
             // btnRegister
@@ -129,11 +130,22 @@
             txtUsername.Size = new Size(192, 23);
             txtUsername.TabIndex = 39;
             // 
+            // close_btn
+            // 
+            close_btn.Location = new Point(165, 291);
+            close_btn.Name = "close_btn";
+            close_btn.Size = new Size(120, 35);
+            close_btn.TabIndex = 40;
+            close_btn.Text = "Exit";
+            close_btn.UseVisualStyleBackColor = true;
+            close_btn.Click += close_btn_Click;
+            // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(457, 351);
+            Controls.Add(close_btn);
             Controls.Add(txtUsername);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -164,5 +176,6 @@
         private Label label1;
         private Label label2;
         private TextBox txtUsername;
+        private Button close_btn;
     }
 }

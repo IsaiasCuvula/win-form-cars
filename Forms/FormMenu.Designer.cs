@@ -30,7 +30,7 @@
         {
             introduction_btn = new Button();
             report_exit = new Button();
-            exit_btn = new Button();
+            logout = new Button();
             ordersBtn = new Button();
             SuspendLayout();
             // 
@@ -54,15 +54,15 @@
             report_exit.UseVisualStyleBackColor = true;
             report_exit.Click += button2_Click;
             // 
-            // exit_btn
+            // logout
             // 
-            exit_btn.Location = new Point(125, 193);
-            exit_btn.Name = "exit_btn";
-            exit_btn.Size = new Size(120, 35);
-            exit_btn.TabIndex = 2;
-            exit_btn.Text = "Exit";
-            exit_btn.UseVisualStyleBackColor = true;
-            exit_btn.Click += button3_Click;
+            logout.Location = new Point(125, 193);
+            logout.Name = "logout";
+            logout.Size = new Size(120, 35);
+            logout.TabIndex = 2;
+            logout.Text = "Exit";
+            logout.UseVisualStyleBackColor = true;
+            logout.Click += logout_Click;
             // 
             // ordersBtn
             // 
@@ -80,7 +80,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(384, 261);
             Controls.Add(ordersBtn);
-            Controls.Add(exit_btn);
+            Controls.Add(logout);
             Controls.Add(report_exit);
             Controls.Add(introduction_btn);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -95,7 +95,7 @@
 
         private Button introduction_btn;
         private Button report_exit;
-        private Button exit_btn;
+        private Button logout;
         private Button ordersBtn;
     }
 }
