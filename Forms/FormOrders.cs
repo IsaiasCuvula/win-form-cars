@@ -73,7 +73,7 @@ namespace Cars.Forms
                 string.IsNullOrWhiteSpace(txtDistance.Text) ||
                 string.IsNullOrWhiteSpace(txtFare.Text))
             {
-                MessageBox.Show("Preenche todos os campos!", "Atenção",
+                MessageBox.Show("Fill all the forms!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -83,7 +83,7 @@ namespace Cars.Forms
                 System.Globalization.CultureInfo.InvariantCulture,
                 out double distance) || distance <= 0)
             {
-                MessageBox.Show("Distância deve ser um número positivo!", "Atenção",
+                MessageBox.Show("Distância deve ser um número positivo!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -93,7 +93,7 @@ namespace Cars.Forms
                 System.Globalization.CultureInfo.InvariantCulture,
                 out double fare) || fare <= 0)
             {
-                MessageBox.Show("Taxa deve ser um número positivo!", "Atenção",
+                MessageBox.Show("Taxa deve ser um número positivo!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -131,8 +131,8 @@ namespace Cars.Forms
                 cmd.ExecuteNonQuery();
             }
 
-            MessageBox.Show(selectedOrderNumber == -1 ? "Pedido adicionado!" : "Pedido atualizado!",
-                "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(selectedOrderNumber == -1 ? "Order added successfully!" : "Order updated!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             ClearForm();
             LoadOrders();
@@ -153,12 +153,12 @@ namespace Cars.Forms
 
             if (selectedOrderNumber == -1)
             {
-                MessageBox.Show("Seleciona um pedido na tabela!", "Atenção",
+                MessageBox.Show("Select an order from the table!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var confirm = MessageBox.Show("Tens a certeza que queres apagar?", "Confirmar",
+            var confirm = MessageBox.Show("Are you sure you want to delete this car", "Confirmantion",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirm == DialogResult.Yes)
@@ -172,7 +172,7 @@ namespace Cars.Forms
                     cmd.ExecuteNonQuery();
                 }
 
-                MessageBox.Show("Pedido apagado!", "Sucesso",
+                MessageBox.Show("Order deleted!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 LoadOrders();

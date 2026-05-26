@@ -47,7 +47,7 @@ namespace Cars.Forms
                 string.IsNullOrWhiteSpace(txtCarBrand.Text) ||
                 string.IsNullOrWhiteSpace(txtDriverName.Text))
             {
-                MessageBox.Show("Preenche todos os campos!", "Atenção",
+                MessageBox.Show("Fill all the forms!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -82,8 +82,8 @@ namespace Cars.Forms
                 cmd.ExecuteNonQuery();
             }
 
-            MessageBox.Show(selectedCodeTaxi == -1 ? "Carro adicionado!" : "Carro atualizado!",
-                "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(selectedCodeTaxi == -1 ? "Car added successfully!" : "Car updated!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             ClearForm();
             LoadCars();
@@ -103,12 +103,12 @@ namespace Cars.Forms
         {
             if (selectedCodeTaxi == -1)
             {
-                MessageBox.Show("Seleciona um carro na tabela!", "Atenção",
+                MessageBox.Show("Select a car in the table!", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var confirm = MessageBox.Show("Tens a certeza que queres apagar?", "Confirmar",
+            var confirm = MessageBox.Show("Are you sure you want to delete this car?", "Confirmation",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirm == DialogResult.Yes)
@@ -122,7 +122,7 @@ namespace Cars.Forms
                     cmd.ExecuteNonQuery();
                 }
 
-                MessageBox.Show("Carro apagado!", "Sucesso",
+                MessageBox.Show("Car deleted!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 LoadCars();
