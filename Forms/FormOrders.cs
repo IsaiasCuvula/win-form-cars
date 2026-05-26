@@ -48,17 +48,18 @@ namespace Cars.Forms
             {
                 conn.Open();
                 string sql = @"
-            SELECT o.OrderNumber, c.RegNumber, c.CarBrand, 
-                   o.Address, o.OrderTime, o.Distance, o.Fare
-            FROM Orders o
-            INNER JOIN Cars c ON o.CodeTaxi = c.CodeTaxi
-            ORDER BY o.OrderTime DESC";
+                SELECT o.OrderNumber, c.RegNumber, c.CarBrand, 
+                       o.Address, o.OrderTime, o.Distance, o.Fare
+                FROM Orders o
+                INNER JOIN Cars c ON o.CodeTaxi = c.CodeTaxi
+                WHERE o.UserId = @userId
+                ORDER BY o.OrderTime DESC";
 
                 var cmd = new SqliteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@userId", Session.UserId);
 
                 var ds = new DataSet();
                 ds.EnforceConstraints = false;
-
                 var dt = ds.Tables.Add("Orders");
 
                 using (var reader = cmd.ExecuteReader())

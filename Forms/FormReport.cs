@@ -27,20 +27,25 @@ namespace Cars.Forms
                 conn.Open();
                 string sql = @"
                     SELECT 
-                        c.RegNumber      AS 'Reg. Number',
-                        c.CarBrand       AS 'Brand',
+                        c.RegNumber          AS 'Reg. Number',
+                        c.CarBrand           AS 'Brand',
                         COUNT(o.OrderNumber) AS 'Total Orders',
-                        SUM(o.Fare)      AS 'Total (Euro)'
+                        SUM(o.Fare)          AS 'Total (Euro)'
                     FROM Orders o
                     INNER JOIN Cars c ON o.CodeTaxi = c.CodeTaxi
                     WHERE o.OrderTime < @date
+                    AND o.UserId = @userId
                     GROUP BY c.CodeTaxi, c.RegNumber, c.CarBrand
                     ORDER BY SUM(o.Fare) DESC";
 
                 var cmd = new SqliteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@date", filterDate);
+                cmd.Parameters.AddWithValue("@userId", Session.UserId);
 
-                var dt = new DataTable();
+                var ds = new DataSet();
+                ds.EnforceConstraints = false;
+                var dt = ds.Tables.Add("Report");
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     dt.Load(reader);
@@ -49,7 +54,7 @@ namespace Cars.Forms
                 dgvReport.DataSource = dt;
 
                 if (dt.Rows.Count == 0)
-                    MessageBox.Show("No orders find for this date.", "Info",
+                    MessageBox.Show("No orders found for this date.", "Info",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
